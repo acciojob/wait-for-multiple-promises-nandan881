@@ -1,9 +1,8 @@
-//your JS code here. If required.
 document.addEventListener("DOMContentLoaded", () => {
   const output = document.getElementById("output");
 
-  // Show initial loading message
-  output.innerHTML = `<tr><td colspan="2">Loading...</td></tr>`;
+  // Show initial loading message with ID for Cypress test detection
+  output.innerHTML = `<tr id="loading"><td colspan="2">Loading...</td></tr>`;
 
   // Function to create a promise that resolves after a random time (1 to 3 seconds)
   function createPromise(index) {
@@ -18,8 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Wait for all promises to resolve
   Promise.all(promises).then((results) => {
-    // Remove loading row
-    output.innerHTML = "";
+    // Remove loading row before adding results
+    document.getElementById("loading")?.remove();
 
     let maxTime = 0;
 
